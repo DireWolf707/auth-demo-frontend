@@ -37,7 +37,7 @@ const ForgetPassword = () => {
           <Typography variant="h6" fontWeight="bold" color="red" textAlign="center">
             Forget Password
           </Typography>
-          <TextField inputProps={{ ref: emailRef }} label="Email" variant="outlined" size="small" color="error" />
+          <TextField inputProps={{ ref: emailRef }} label="Email" variant="outlined" size="small" color="error" required type="email" />
           <Button type="submit" variant="contained" color="error" disabled={isLoading}>
             Submit
           </Button>

@@ -33,9 +33,17 @@ const Signup = () => {
       <Typography variant="h6" fontWeight="bold" color="red" textAlign="center">
         Signup
       </Typography>
-      <TextField inputProps={{ ref: nameRef }} label="Name" variant="outlined" size="small" color="error" />
-      <TextField inputProps={{ ref: emailRef }} label="Email" variant="outlined" size="small" color="error" />
-      <TextField inputProps={{ ref: passwordRef }} label="Password" variant="outlined" size="small" color="error" />
+      <TextField inputProps={{ ref: nameRef }} label="Name" variant="outlined" size="small" color="error" required type="text" />
+      <TextField inputProps={{ ref: emailRef }} label="Email" variant="outlined" size="small" color="error" required type="email" />
+      <TextField
+        inputProps={{ ref: passwordRef }}
+        label="Password"
+        variant="outlined"
+        size="small"
+        color="error"
+        required
+        type="password"
+      />
       <Button type="submit" variant="contained" color="error" disabled={isLoading}>
         Submit
       </Button>

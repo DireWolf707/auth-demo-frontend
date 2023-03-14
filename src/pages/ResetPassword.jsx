@@ -30,7 +30,7 @@ const ResetPassword = () => {
       <Typography variant="h6" fontWeight="bold" color="red" textAlign="center">
         Reset Password
       </Typography>
-      <TextField inputProps={{ ref: passwordRef }} label="Password" variant="outlined" size="small" color="error" />
+      <TextField inputProps={{ ref: passwordRef }} label="Password" variant="outlined" size="small" color="error" required type="password" />
       <Button type="submit" variant="contained" color="error" disabled={isLoading}>
         Submit
       </Button>
