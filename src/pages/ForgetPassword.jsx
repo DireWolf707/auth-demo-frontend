@@ -1,6 +1,7 @@
 import React, { useRef } from "react"
 import { Stack, Typography, TextField, Button } from "@mui/material"
 import { useForgetPasswordMutation } from "../../store"
+import handleBackendErrors from "../utils/handleBackendErrors"
 
 const ForgetPassword = () => {
   const [forgetPassword, { isLoading, isSuccess }] = useForgetPasswordMutation()
@@ -10,9 +11,7 @@ const ForgetPassword = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     const email = emailRef.current.value
-    forgetPassword({ email })
-      .unwrap()
-      .catch((err) => console.error(err))
+    forgetPassword({ email }).unwrap().catch(handleBackendErrors())
   }
 
   return (
@@ -21,7 +20,7 @@ const ForgetPassword = () => {
       component="form"
       flexDirection="column"
       gap={1.2}
-      sx={{ borderRadius: "4px", m: "auto", p: "24px", bgcolor: "white" }}
+      sx={{ borderRadius: "4px", m: "auto", p: "24px", bgcolor: "white", width: "320px" }}
     >
       {isSuccess ? (
         <>
