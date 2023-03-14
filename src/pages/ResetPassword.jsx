@@ -1,9 +1,10 @@
 import React, { useRef } from "react"
 import { Stack, Typography, TextField, Button } from "@mui/material"
 import { useResetPasswordMutation } from "../../store"
-import { Link, useParams } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 
 const ResetPassword = () => {
+  const navigate = useNavigate()
   const [resetPassword, { isLoading }] = useResetPasswordMutation()
   const { resetToken } = useParams()
 
@@ -13,6 +14,9 @@ const ResetPassword = () => {
     e.preventDefault()
     const password = passwordRef.current.value
     resetPassword({ password, resetToken })
+      .unwrap()
+      .then(() => navigate("/"))
+      .catch((err) => console.error(err))
   }
 
   return (

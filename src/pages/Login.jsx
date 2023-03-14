@@ -1,9 +1,10 @@
 import React, { useRef } from "react"
 import { Stack, Typography, TextField, Button } from "@mui/material"
 import { useLoginMutation } from "../../store"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 const Login = () => {
+  const navigate = useNavigate()
   const [login, { isLoading }] = useLoginMutation()
 
   const emailRef = useRef(null)
@@ -14,6 +15,9 @@ const Login = () => {
     const email = emailRef.current.value
     const password = passwordRef.current.value
     login({ email, password })
+      .unwrap()
+      .then(() => navigate("/"))
+      .catch((err) => console.error(err))
   }
 
   return (
