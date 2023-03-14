@@ -3,7 +3,7 @@ import { useCallback } from "react"
 
 const toastOptions = {
   variant: "error",
-  anchorOrigin: { horizontal: "right", vertical: "top" },
+  anchorOrigin: { horizontal: "center", vertical: "bottom" },
 }
 
 const defaultHandler = (errors, toast) => {

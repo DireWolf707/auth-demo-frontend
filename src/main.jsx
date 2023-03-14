@@ -13,7 +13,7 @@ const theme = createTheme({})
 ReactDOM.createRoot(document.getElementById("root")).render(
   <StoreProvider store={store}>
     <ThemeProvider theme={theme}>
-      <SnackbarProvider autoHideDuration={3000} dense={false} maxSnack={4} hideIconVariant={false}>
+      <SnackbarProvider autoHideDuration={3000} dense={false} maxSnack={3} hideIconVariant={false}>
         <Router>
           <App />
         </Router>
