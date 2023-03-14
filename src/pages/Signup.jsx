@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react"
 import { Stack, Typography, TextField, Button } from "@mui/material"
 import { useSignupMutation } from "../../store"
 import { useNavigate } from "react-router-dom"
-import handleFormErrors from "../utils/handleFormErrors"
+import handleBackendErrors from "../utils/handleBackendErrors"
 
 const Signup = () => {
   const navigate = useNavigate()
@@ -21,7 +21,7 @@ const Signup = () => {
     signup({ email, password, name })
       .unwrap()
       .then(() => navigate("/login"))
-      .catch(handleFormErrors(setFormErrors))
+      .catch(handleBackendErrors(setFormErrors))
   }
 
   return (
