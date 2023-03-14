@@ -3,7 +3,8 @@ import { Routes, Route, Navigate, Outlet } from "react-router-dom"
 import { Stack } from "@mui/material"
 import { useProfileQuery } from "../store"
 import Navbar from "./components/Navbar"
-import { Profile, Signup, Login, Home, ForgetPassword, ResetPassword } from "./pages"
+import AuthLoader from "./components/loaders/AuthLoader"
+import { Profile, Signup, Login, Home, ForgetPassword, ResetPassword, Error404 } from "./pages"
 
 const LoggedInRoute = ({ user, redirectPath }) => {
   if (!user) return <Navigate to={redirectPath} replace />
@@ -17,7 +18,7 @@ const NonLoggedInRoute = ({ user, redirectPath }) => {
 
 const App = () => {
   const { data, isFetching, isError } = useProfileQuery()
-  // if (isFetching) return <>Loading</>
+  if (isFetching || isError) return <AuthLoader />
 
   return (
     <Stack sx={{ height: "100vh", width: "100vw", bgcolor: "#000" }}>
@@ -38,7 +39,7 @@ const App = () => {
           <Route path="/reset-password/:resetToken" element={<ResetPassword />} />
         </Route>
         {/* Unknown Routes (404) */}
-        <Route path="*" element={<div>404 NOT FOUND</div>} />
+        <Route path="*" element={<Error404 />} />
         {/* End */}
       </Routes>
     </Stack>

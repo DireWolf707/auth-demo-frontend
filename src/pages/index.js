@@ -4,5 +4,6 @@ import Login from "./Login"
 import Home from "./Home"
 import ForgetPassword from "./ForgetPassword"
 import ResetPassword from "./ResetPassword"
+import Error404 from "./Error404"
 
-export { Profile, Signup, Login, Home, ForgetPassword, ResetPassword }
+export { Profile, Signup, Login, Home, ForgetPassword, ResetPassword, Error404 }
