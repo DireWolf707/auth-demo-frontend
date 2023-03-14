@@ -14,7 +14,7 @@ export const backendApi = createApi({
   endpoints(builder) {
     return {
       login: builder.mutation({
-        invalidatesTags: ["profile"],
+        invalidatesTags: (result, error, arg) => (error ? [] : ["profile"]),
         query: ({ email, password }) => ({
           url: "/login",
           method: "POST",
@@ -39,7 +39,7 @@ export const backendApi = createApi({
       }),
 
       logout: builder.mutation({
-        invalidatesTags: ["profile"],
+        invalidatesTags: (result, error, arg) => (error ? [] : ["profile"]),
         query: () => ({
           url: "/logout",
           method: "POST",
@@ -55,7 +55,7 @@ export const backendApi = createApi({
       }),
 
       resetPassword: builder.mutation({
-        invalidatesTags: ["profile"],
+        invalidatesTags: (result, error, arg) => (error ? [] : ["profile"]),
         query: ({ resetToken: token, password }) => ({
           url: "/reset-password",
           method: "POST",
