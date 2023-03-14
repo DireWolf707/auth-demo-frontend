@@ -1,17 +1,18 @@
 import React, { useRef } from "react"
 import { Stack, Typography, TextField, Button } from "@mui/material"
 import { useForgetPasswordMutation } from "../../store"
-import handleBackendErrors from "../utils/handleBackendErrors"
+import { useBackendErrorHandler } from "../hooks/useBackendErrorHandler"
 
 const ForgetPassword = () => {
   const [forgetPassword, { isLoading, isSuccess }] = useForgetPasswordMutation()
 
   const emailRef = useRef(null)
+  const { errorHandler } = useBackendErrorHandler()
 
   const handleSubmit = (e) => {
     e.preventDefault()
     const email = emailRef.current.value
-    forgetPassword({ email }).unwrap().catch(handleBackendErrors())
+    forgetPassword({ email }).unwrap().catch(errorHandler)
   }
 
   return (

@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react"
 import { Stack, Typography, TextField, Button } from "@mui/material"
 import { useSignupMutation } from "../../store"
 import { useNavigate } from "react-router-dom"
-import handleBackendErrors from "../utils/handleBackendErrors"
+import { useBackendErrorHandler } from "../hooks/useBackendErrorHandler"
 
 const Signup = () => {
   const navigate = useNavigate()
@@ -12,6 +12,7 @@ const Signup = () => {
   const emailRef = useRef(null)
   const passwordRef = useRef(null)
   const [formErrors, setFormErrors] = useState({})
+  const { errorHandler } = useBackendErrorHandler(setFormErrors)
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -21,7 +22,7 @@ const Signup = () => {
     signup({ email, password, name })
       .unwrap()
       .then(() => navigate("/login"))
-      .catch(handleBackendErrors(setFormErrors))
+      .catch(errorHandler)
   }
 
   return (

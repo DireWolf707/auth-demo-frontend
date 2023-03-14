@@ -2,14 +2,15 @@ import React, { useRef } from "react"
 import { Stack, Typography, TextField, Button } from "@mui/material"
 import { useLoginMutation } from "../../store"
 import { Link, useNavigate } from "react-router-dom"
-import handleBackendErrors from "../utils/handleBackendErrors"
+import { useBackendErrorHandler } from "../hooks/useBackendErrorHandler"
 
 const Login = () => {
   const navigate = useNavigate()
   const [login, { isLoading }] = useLoginMutation()
-
+  
   const emailRef = useRef(null)
   const passwordRef = useRef(null)
+  const { errorHandler } = useBackendErrorHandler()
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -18,7 +19,7 @@ const Login = () => {
     login({ email, password })
       .unwrap()
       .then(() => navigate("/"))
-      .catch(handleBackendErrors())
+      .catch(errorHandler)
   }
 
   return (

@@ -2,7 +2,7 @@ import React, { useRef } from "react"
 import { Stack, Typography, TextField, Button } from "@mui/material"
 import { useResetPasswordMutation } from "../../store"
 import { useParams, useNavigate } from "react-router-dom"
-import handleBackendErrors from "../utils/handleBackendErrors"
+import { useBackendErrorHandler } from "../hooks/useBackendErrorHandler"
 
 const ResetPassword = () => {
   const navigate = useNavigate()
@@ -10,6 +10,7 @@ const ResetPassword = () => {
   const [resetPassword, { isLoading }] = useResetPasswordMutation()
 
   const passwordRef = useRef(null)
+  const { errorHandler } = useBackendErrorHandler()
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -17,7 +18,7 @@ const ResetPassword = () => {
     resetPassword({ password, resetToken })
       .unwrap()
       .then(() => navigate("/"))
-      .catch(handleBackendErrors())
+      .catch(errorHandler)
   }
 
   return (
