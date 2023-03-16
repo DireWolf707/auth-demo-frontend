@@ -11,14 +11,22 @@ const Signup = () => {
   const nameRef = useRef(null)
   const emailRef = useRef(null)
   const passwordRef = useRef(null)
+  const passwordConfirmRef = useRef(null)
+  // required only if any any of back or frontend do validation
   const [formErrors, setFormErrors] = useState({})
+  // setFormErrors passed only in case backend send valdation errors
   const { errorHandler } = useBackendErrorHandler(setFormErrors)
 
   const handleSubmit = (e) => {
     e.preventDefault()
     const email = emailRef.current.value
-    const password = passwordRef.current.value
     const name = nameRef.current.value
+    const password = passwordRef.current.value
+    const passwordConfirm = passwordConfirmRef.current.value
+    // setFormErrors used for frontend validation
+    if (password !== passwordConfirm) return setFormErrors({ passwordConfirm: "Password don't match." })
+    // else setFormErrors({}) in case of only frontend validations happening
+
     signup({ email, password, name })
       .unwrap()
       .then(() => navigate("/login"))
@@ -37,41 +45,25 @@ const Signup = () => {
         Signup
       </Typography>
 
-      <TextField
-        inputProps={{ ref: nameRef }}
-        label="Name"
-        variant="outlined"
-        size="small"
-        color="error"
-        required
-        type="text"
-        error={Boolean(formErrors?.name)}
-        helperText={formErrors?.name}
-      />
-
-      <TextField
-        inputProps={{ ref: emailRef }}
-        label="Email"
-        variant="outlined"
-        size="small"
-        color="error"
-        required
-        type="email"
-        error={Boolean(formErrors?.email)}
-        helperText={formErrors?.email}
-      />
-
-      <TextField
-        inputProps={{ ref: passwordRef }}
-        label="Password"
-        variant="outlined"
-        size="small"
-        color="error"
-        required
-        type="password"
-        error={Boolean(formErrors?.password)}
-        helperText={formErrors?.password}
-      />
+      {[
+        { label: "Name", errField: "name", ref: nameRef, type: "text", required: true },
+        { label: "Email", errField: "email", ref: emailRef, type: "email", required: true },
+        { label: "Password", errField: "password", ref: passwordRef, type: "password", required: true },
+        { label: "Confirm Password", errField: "passwordConfirm", ref: passwordConfirmRef, type: "password", required: true },
+      ].map(({ label, errField, ref, type, required }, idx) => (
+        <TextField
+          key={idx}
+          inputProps={{ ref }}
+          label={label}
+          variant="outlined"
+          size="small"
+          color="error"
+          required={required}
+          type={type}
+          error={Boolean(formErrors[errField])}
+          helperText={formErrors[errField]}
+        />
+      ))}
 
       <Button type="submit" variant="contained" color="error" disabled={isLoading}>
         Submit

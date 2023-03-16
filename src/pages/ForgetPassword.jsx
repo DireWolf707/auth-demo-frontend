@@ -28,6 +28,7 @@ const ForgetPassword = () => {
           <Typography variant="h6" fontWeight="bold" color="red" textAlign="center">
             Email Sent Successfully
           </Typography>
+
           <Typography variant="body2" fontWeight="bold" color="black" textAlign="center">
             Check your e-mail for further instructions!
           </Typography>
@@ -37,7 +38,9 @@ const ForgetPassword = () => {
           <Typography variant="h6" fontWeight="bold" color="red" textAlign="center">
             Forget Password
           </Typography>
+
           <TextField inputProps={{ ref: emailRef }} label="Email" variant="outlined" size="small" color="error" required type="email" />
+
           <Button type="submit" variant="contained" color="error" disabled={isLoading}>
             Submit
           </Button>

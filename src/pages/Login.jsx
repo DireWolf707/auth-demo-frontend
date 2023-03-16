@@ -7,7 +7,7 @@ import { useBackendErrorHandler } from "../hooks/useBackendErrorHandler"
 const Login = () => {
   const navigate = useNavigate()
   const [login, { isLoading }] = useLoginMutation()
-  
+
   const emailRef = useRef(null)
   const passwordRef = useRef(null)
   const { errorHandler } = useBackendErrorHandler()
@@ -34,17 +34,21 @@ const Login = () => {
         Login
       </Typography>
 
-      <TextField inputProps={{ ref: emailRef }} label="Email" variant="outlined" size="small" color="error" required type="email" />
-
-      <TextField
-        inputProps={{ ref: passwordRef }}
-        label="Password"
-        variant="outlined"
-        size="small"
-        color="error"
-        required
-        type="password"
-      />
+      {[
+        { label: "Email", ref: emailRef, type: "email", required: true },
+        { label: "Password", ref: passwordRef, type: "password", required: true },
+      ].map(({ label, ref, type, required }, idx) => (
+        <TextField
+          key={idx}
+          inputProps={{ ref }}
+          label={label}
+          variant="outlined"
+          size="small"
+          color="error"
+          required={required}
+          type={type}
+        />
+      ))}
 
       <Button type="submit" variant="contained" color="error" disabled={isLoading}>
         Submit
