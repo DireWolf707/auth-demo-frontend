@@ -29,7 +29,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         {/* LoggedIn Routes */}
         <Route element={<LoggedInRoute user={data?.user} redirectPath="/login" />}>
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile/*" element={<Profile />} />
         </Route>
         {/* Non-LoggedIn Routes */}
         <Route element={<NonLoggedInRoute user={data?.user} redirectPath="/profile" />}>
