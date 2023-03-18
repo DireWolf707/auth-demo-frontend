@@ -1,10 +1,8 @@
 import { useSnackbar } from "notistack"
 import { useCallback } from "react"
+import { toastOptions as toastDefaultOptions } from "../utils/toastOptions"
 
-const toastOptions = {
-  variant: "error",
-  anchorOrigin: { horizontal: "center", vertical: "bottom" },
-}
+const toastOptions = toastDefaultOptions()
 
 const defaultHandler = (errors, toast) => {
   errors.forEach((error) => toast(error.message, toastOptions))
