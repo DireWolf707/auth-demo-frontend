@@ -1,22 +1,39 @@
 import { configureStore } from "@reduxjs/toolkit"
 import { setupListeners } from "@reduxjs/toolkit/query"
 import {
-  backendApi,
+  usersApi,
   useSignupMutation,
   useLoginMutation,
   useLogoutMutation,
   useProfileQuery,
   useForgetPasswordMutation,
   useResetPasswordMutation,
-} from "./apis/backendApi"
+  useChangePasswordMutation,
+  useChangeDetailsMutation,
+  useUpdateProfilePicMutation,
+  useRemoveProfilePicMutation,
+  useAddProfilePicMutation,
+} from "./apis/usersApi"
 
 export const store = configureStore({
   reducer: {
-    [backendApi.reducerPath]: backendApi.reducer,
+    [usersApi.reducerPath]: usersApi.reducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(backendApi.middleware),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(usersApi.middleware),
 })
 
 setupListeners(store.dispatch)
 
-export { useSignupMutation, useLoginMutation, useLogoutMutation, useProfileQuery, useForgetPasswordMutation, useResetPasswordMutation }
+export {
+  useSignupMutation,
+  useLoginMutation,
+  useLogoutMutation,
+  useProfileQuery,
+  useForgetPasswordMutation,
+  useResetPasswordMutation,
+  useChangePasswordMutation,
+  useChangeDetailsMutation,
+  useUpdateProfilePicMutation,
+  useRemoveProfilePicMutation,
+  useAddProfilePicMutation,
+}
